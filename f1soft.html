@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Company Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: white;
+        }
+
+        /* Navigation */
+nav {
+  position: fixed;
+  width: 100%;
+  padding: 1.5rem 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent;
+  transition: background-color 0.3s;
+  z-index: 1000;
+}
+
+nav.scrolled {
+  background-color: rgba(10, 10, 10, 0.9);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+.logo img {
+  height: 32px;
+}
+
+.logo span {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #ff6b6b;
+}
+
+.get-in-touch {
+  padding: 0.5rem 1rem;
+  border: 1px solid white;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.get-in-touch:hover {
+  background-color: white;
+  color: black !important;
+}
+
+/* Hamburger menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 2px 0;
+  transition: 0.4s;
+}
+
+/* Media query for responsive design */
+@media screen and (max-width: 768px) {
+  nav {
+    padding: 1rem 2rem;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background-color: rgba(10, 10, 10, 0.9);
+    padding: 1rem;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a {
+    padding: 0.5rem 0;
+  }
+}
+
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://media.istockphoto.com/id/537331500/photo/programming-code-abstract-technology-background-of-software-deve.jpg?b=1&s=612x612&w=0&k=20&c=B1O_UHuhlV34GJnQxQgxGDqmtBKMJkMf_FGssI1WEVE=');
+    background-size: cover;
+    background-position: center;
+    filter: blur(5px);
+    z-index: -2;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+
+
+/* Update these classes to ensure content stays sharp */
+.hero-title, .hero-subtitle {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    opacity: 0;
+    animation: fadeInUp 1s ease forwards;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+
+        .gradient-text {
+            background: linear-gradient(90deg, 
+                #ff6b6b 0%, 
+                #ff8e53 33%, 
+                #ffeb3b 66%, 
+                #4caf50 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            max-width: 600px;
+            font-size: 1.2rem;
+            color: #cccccc;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+
+        /* ABOUT US */
+
+        .slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.3);
+    z-index: -1;
+}
+
+.slide:nth-child(1)::before {
+    background-image: url('https://plus.unsplash.com/premium_photo-1681487769650-a0c3fbaed85a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZmluYW5jZXxlbnwwfHwwfHx8MA%3D%3D');
+}
+
+.slide:nth-child(2)::before {
+    background-image: url('https://media.licdn.com/dms/image/v2/C5612AQGj0AZ9O9xMeg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1611009557244?e=2147483647&v=beta&t=arioVTeY-PnbffkVRWWl2AvgUdEqPX5E1Ggs0oOojdE');
+}
+
+.slide:nth-child(3)::before {
+    background-image: url('https://wallpapercat.com/w/full/5/7/7/2119726-1920x1080-desktop-1080p-innovation-wallpaper-photo.jpg');
+}
+
+.slide-content {
+    max-width: 800px;
+    z-index: 1;
+}
+
+.slide-title {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.slide-description {
+    font-size: 1.1rem;
+    color: #cccccc;
+    line-height: 1.6;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 2;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.dot.active {
+    background: white;
+}
+
+
+
+
+
+        /* Solutions Section */
+        .solutions {
+            padding: 6rem 4rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #cccccc;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tech-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-card img {
+            height: 60px;
+            margin-bottom: 1rem;
+        }
+
+        .tech-card h3 {
+            font-size: 1rem;
+            text-align: center;
+            color: white;
+        }
+
+        /* Career Section */
+        .career {
+            padding: 6rem 4rem;
+        }
+
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .job-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .job-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .job-icon {
+            font-size: 2rem;
+            color: #ff6b6b;
+        }
+
+        .job-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-info p {
+            color: #cccccc;
+            font-size: 0.9rem;
+        }
+
+/*TEAM*/
+  
+  .team-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }  
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  
+  .team-card {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .card-content {
+    position: relative;
+    aspect-ratio: 1;
+  }
+  
+  .member-image {
+    position: absolute;
+    inset: 0;
+    border-radius: 30px;
+    overflow: hidden;
+  }
+
+
+  
+  .member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+  }
+  
+  .member-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 50%, transparent 100%);
+    color: white;
+  }
+  
+  .member-info h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .member-info p {
+    font-size: 1rem;
+    opacity: 0.9;
+  }
+  
+  .member-info .subtitle {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: -0.25rem;
+  }
+  
+  @media (max-width: 768px) {
+    .team-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+  
+    .team-header h2 {
+      font-size: 2rem;
+    }
+  
+    .member-info {
+      padding: 1rem;
+    }
+  
+    .member-info h3 {
+      font-size: 1.25rem;
+    }
+  }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column ul li a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-links a {
+            color: white;
+            margin-left: 1rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .solutions, .career {
+                padding: 3rem 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
+            }
+        }
+
+        .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.scroll-reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Delay classes for staggered animations */
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+
+/* Add stagger animation for grid items */
+.tech-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.tech-card.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.job-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.job-card.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Footer animation */
+.footer-column {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.footer-column.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#hero" class="logo scroll-reveal">
+            <img src="wht.png" alt="Tech Logo">
+            <span>TechCo</span>
+        </a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-links scroll-reveal">
+            <a href="#about">ABOUT US</a>
+            <a href="#solutions">OUR SOLUTIONS</a>
+            <a href="#career">CAREER</a>
+            <a href="#members" class="get-in-touch">OUR MEMBERS</a>
+        </div>
+    </nav>
+    
+
+    <section class="hero scroll-reveal" id="hero" >
+        <h1 class="hero-title animate-fade-up ">
+            For <span class="gradient-text">Possibilities, Progress</span> & 
+            <span class="gradient-text">Prosperity</span>
+        </h1>
+        <p class="hero-subtitle animate-fade-up delay-200">
+            We democratize technology services to create new possibilities 
+            for digital progress and business prosperity.
+        </p>
+    </section> 
+
+     <!-- ABOUT US -->
+      
+<section id="about" class="slider-container scroll-reveal" >
+    <div class="slide active ">
+        <div class="slide-content">
+            <h2 class="slide-title gradient-text scroll-reveal " >
+                We democratize financial services to create new possibilities
+            </h2>
+            <p class="slide-description scroll-reveal">
+                WhoTheFreak aims to make finance accessible and inclusive for individuals and businesses through technological innovations. We work to remove barriers and ensure equal opportunities for everyone.
+            </p>
+        </div>
+    </div>
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="slide-title gradient-text scroll-reveal">
+                2 years of driving digital transformation
+            </h2>
+            <p class="slide-description scroll-reveal">
+                For over two years, we have been at the forefront of developing and delivering impactful digital solutions that reshape the financial landscape.
+            </p>
+        </div>
+    </div>
+    <div class="slide">
+        <div class="slide-content">
+            <h2 class="slide-title gradient-text scroll-reveal">
+                Growing together through meaningful innovation
+            </h2>
+            <p class="slide-description scroll-reveal">
+                Designed with scalability, security and adaptability at its core, our advanced tech stack is the cornerstone of how we help partners grow and thrive.
+            </p>
+        </div>
+    </div>
+    <div class="slider-dots">
+        <span class="dot active"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</section>
+
+<!-- SOLUTIONS -->
+
+    <section class="solutions scroll-reveal" id="solutions">
+        <h2 class="section-title scroll-reveal">Our <span class="gradient-text scroll-reveal">Solutions</span></h2>
+        <p class="section-subtitle scroll-reveal">
+            We leverage cutting-edge technologies to deliver innovative solutions 
+            that drive business growth and digital transformation.
+        </p>
+        <div class="tech-grid ">
+            <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
+                <h3>React</h3>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python">
+                <h3>Python</h3>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js">
+                <h3>Node.js</h3>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="Java">
+                <h3>Java</h3>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript">
+                <h3>TypeScript</h3>
+            </div>
+            <div class="tech-card">
+                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker">
+                <h3>DOCKER</h3>
+            </div>
+            <div class="tech-card">
+                <img src="BC.png" alt="Blockchain">
+                <h3>Blockchain</h3>
+            </div>
+            <div class="tech-card">
+                <img src="F.png" alt="Flutter">
+                <h3>Flutter</h3>
+            </div>
+            <div class="tech-card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/2048px-Ruby_logo.svg.png" alt="Ruby">
+                <h3>Ruby</h3>
+            </div>
+            <div class="tech-card">
+                <img src="DJ.png" alt="DJANGO">
+                <h3>DJANGO</h3>
+            </div>
+        </div>
+      
+    </section>
+
+    <!-- CAREER -->
+
+    <section class="career scroll-reveal" id="career">
+        <h2 class="section-title scroll-reveal">Browse Jobs By <span class="gradient-text scroll-reveal">Category</span></h2>
+        <p class="section-subtitle scroll-reveal">List of job and vacancies listed by companies hiring at our organization.</p>
+        <div class="job-grid">
+            <div class="job-card">
+                <i class="fas fa-code job-icon"></i>
+                <div class="job-info">
+                    <h3>Software Development</h3>
+                    <p>(3 open positions)</p>
+                </div>
+            </div>
+            <div class="job-card">
+                <i class="fas fa-chart-line job-icon"></i>
+                <div class="job-info">
+                    <h3>Business Development</h3>
+                    <p>(2 open positions)</p>
+                </div>
+            </div>
+            <div class="job-card">
+                <i class="fas fa-brands fa-a job-icon"></i>
+                <div class="job-info">
+                    <h3>Angular Developer</h3>
+                    <p>(1 open positions)</p>
+                </div>
+            </div>
+            <div class="job-card">
+                <i class="fas fa-thin fa-atom job-icon"></i>
+                <div class="job-info">
+                    <h3>Ractive Native Developer</h3>
+                    <p>(1 open positions)</p>
+                </div>
+            </div>
+            <div class="job-card">
+                <i class="fas fa-solid fa-pen-nib job-icon"></i>
+                <div class="job-info">
+                    <h3>Graphics Designer</h3>
+                    <p>(2 open positions)</p>
+                </div>
+            </div>
+            <div class="job-card">
+                <i class="fas fa-brand fa-figma job-icon"></i>
+                <div class="job-info">
+                    <h3>UI/UX Designer</h3>
+                    <p>(2 open positions)</p>
+                </div>
+            </div>
+            <div class="job-card">
+                <i class="fas fa-solid fa-gear job-icon"></i>
+                <div class="job-info">
+                    <h3>QA Engineer</h3>
+                    <p>(1 open positions)</p>
+                </div>
+            </div>
+            <div class="job-card">
+                <i class="fas fa-solid  fa-person job-icon"></i>
+                <div class="job-info">
+                    <h3>Content Creato(Female)</h3>
+                    <p>(5 open positions)</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+
+    <section class="team-section scroll-reveal" id="members">
+        <div class="team-header">
+            <h2 class="section-title scroll-reveal">Meet the <span class="gradient-text scroll-reveal">TEAM MEMBERS</span></h2>
+        </div>
+        
+        <div class="team-grid scroll-reveal">
+            <!-- Team Member 1 -->
+            <div class="team-card">
+                <div class="card-content">
+                    <div class="member-image scroll-reveal">
+                        <img src="MR.M.jpeg" alt="Prajwal Kishor Sharma">
+                    </div>
+                    <div class="member-info">
+                        <h3>Prajwal Kishor Sharma</h3>
+                        <p>Cheif Executive Officer</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 2 -->
+            <div class="team-card">
+                <div class="card-content">
+                    <div class="member-image scroll-reveal">
+                        <img src="pratik.jpeg" alt="Pratik">
+                    </div>
+                    <div class="member-info">
+                        <h3>Pratik Nepal</h3>
+                        <p>Co-Founder</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 3 -->
+            <div class="team-card">
+                <div class="card-content">
+                    <div class="member-image scroll-reveal">
+                        <img src="samman.jpeg" alt="Samman Thapa Chhetri">
+                    </div>
+                    <div class="member-info">
+                        <h3>Samman Thapa Chhetri</h3>
+                        <p>Management Consultant</p>
+                        <p class="subtitle"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 4 -->
+            <div class="team-card">
+                <div class="card-content">
+                    <div class="member-image scroll-reveal">
+                        <img src="hari.jpeg" alt="Sid Neupane">
+                    </div>
+                    <div class="member-info">
+                        <h3>Sid Neupane</h3>
+                        <p>HR Department</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 5 -->
+            <div class="team-card">
+                <div class="card-content">
+                    <div class="member-image scroll-reveal">
+                        <img src="DInesh.png" alt="Dinesh Poudel">
+                    </div>
+                    <div class="member-info">
+                        <h3>Dinesh Poudel</h3>
+                        <p>Business Development</p>
+                        <p class="subtitle">Department</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Member 6 -->
+            <div class="team-card">
+                <div class="card-content">
+                    <div class="member-image scroll-reveal">
+                        <img src="pk.png" alt="Parbesh ">
+                    </div>
+                    <div class="member-info">
+                        <h3>Parbesh Khadka</h3>
+                        <p>Content Creator</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-content">
+                    <div class="member-image scroll-reveal">
+                        <img src="suman.png" alt="Parbesh ">
+                    </div>
+                    <div class="member-info">
+                        <h3>Suman Chhetri</h3>
+                        <p>UI/UX Designer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <div class="card-content">
+                    <div class="member-image scroll-reveal">
+                        <img src="Rishav.png" alt="Parbesh ">
+                    </div>
+                    <div class="member-info">
+                        <h3>Rishav Bhusal</h3>
+                        <p>Front-End Engineer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Solutions</h4>
+                <ul>
+                    <li><a href="#web">Web Development</a></li>
+                    <li><a href="#mobile">Mobile Development</a></li>
+                    <li><a href="#cloud">Cloud Solutions</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#docs">Documentation</a></li>
+                    <li><a href="#support">Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Your Company. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <script>
+        // Add background to navbar on scroll
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Hero section animation
+document.addEventListener('DOMContentLoaded', function() {
+    const heroElements = document.querySelectorAll('.animate-fade-up');
+    heroElements.forEach(element => {
+        element.style.opacity = '1';
+    });
+});
+
+// Slider functionality
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+let currentSlide = 0;
+
+function showSlide(index) {
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+    
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+// Add click events to dots
+dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        currentSlide = index;
+        showSlide(currentSlide);
+    });
+});
+
+// Auto-advance slides
+setInterval(nextSlide, 5000);
+
+
+function createScrollObserver() {
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target); // Stop observing once animated
+            }
+        });
+    }, options);
+
+    // Observe all elements with scroll-reveal class
+    document.querySelectorAll('.scroll-reveal').forEach(element => {
+        observer.observe(element);
+    });
+
+    // Observe tech cards with stagger effect
+    const techCards = document.querySelectorAll('.tech-card');
+    techCards.forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(card);
+    });
+
+    // Observe job cards with stagger effect
+    const jobCards = document.querySelectorAll('.job-card');
+    jobCards.forEach((card, index) => {
+        card.style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(card);
+    });
+
+    // Observe footer columns with stagger effect
+    const footerColumns = document.querySelectorAll('.footer-column');
+    footerColumns.forEach((column, index) => {
+        column.style.transitionDelay = `${index * 0.1}s`;
+        observer.observe(column);
+    });
+}
+
+// Initialize scroll animations when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    createScrollObserver();
+});
+
+// Smooth scroll for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.querySelector(".hamburger")
+  const navLinks = document.querySelector(".nav-links")
+  const nav = document.querySelector("nav")
+  const hero = document.querySelector("#hero")
+
+  // Function to toggle menu
+  function toggleMenu() {
+    navLinks.classList.toggle("active")
+  }
+
+  // Function to close menu
+  function closeMenu() {
+    if (window.innerWidth <= 768) {
+      // Only close if on mobile
+      navLinks.classList.remove("active")
+    }
+  }
+
+  // Toggle menu when hamburger is clicked
+  hamburger.addEventListener("click", toggleMenu)
+
+  // Close menu when a nav link is clicked
+  navLinks.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu)
+  })
+
+  // Make hamburger transparent in hero section
+  function checkHeroSection() {
+    const heroRect = hero.getBoundingClientRect()
+    if (heroRect.bottom > 0) {
+      hamburger.classList.add("transparent")
+    } else {
+      hamburger.classList.remove("transparent")
+    }
+  }
+
+  // Check hero section on scroll
+  window.addEventListener("scroll", checkHeroSection)
+
+  // Initial check for hero section
+  checkHeroSection()
+
+  // Change nav background on scroll
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 0) {
+      nav.classList.add("scrolled")
+    } else {
+      nav.classList.remove("scrolled")
+    }
+  })
+
+  // Recalculate on window resize
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      navLinks.classList.remove("active")
+    }
+    checkHeroSection()
+  })
+})
+
+
+    </script>
+</body>
+</html>
